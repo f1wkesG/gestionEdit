@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Articles</title>
+</head>
+<body>
+
+<h2 th:text="'Les articles ::'"/>
+<ul>
+    <li th:each="article : ${articles}" th:text="${article.titre}+' '+${article.theme}">article :: </li>
+</ul>
+
+<h2 th:text="'Les articles de Mr.' + ${courant}"/>
+<ul>
+    <li th:each="article : ${articlesUtilisateur}" th:text="${article.titre}+' '+${article.theme}">article :: </li>
+</ul>
+
+<form th:action="@{/articles}" th:method="post">
+    titre : <input type="text" name="titre">
+    contenu : <input type="text" name="contenu">
+    composite :
+    <select name="theme">
+        <option th:each="theme : ${themes}" th:value="${theme}" th:text="${theme}"></option>
+    </select>
+    <button type="submit">Ajouter</button>
+</form>
+
+</body>
+</html>

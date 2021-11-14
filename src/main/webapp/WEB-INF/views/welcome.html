@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Bienvenu</title>
+</head>
+<body>
+<h1>Veuillez choisir votre rôle</h1>
+
+<div th:if="${#fields.hasErrors('global')}">
+    <p>
+        <button type="submit" value="Submit"/><a href="/redacteur">Redacteur en chef</a></button>
+        <button type="submit" value="Submit"/><a href="/assistant">Assistant Redacteur</a></button>
+        <button type="submit" value="Submit"/><a href="/contributeur">Contributeur</a></button>
+    </p>
+</div>
+
+
+</body>
+</html>

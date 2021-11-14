@@ -1,0 +1,8 @@
+package com.exam.gestionEdit.enums;
+
+public enum EtatArticle {
+    ARTICLE_PROPOSE, ARTICLE_REJETE,
+    ARTICLE_ENATTENTE, ARTICLE_POSITIONNE,
+    ARTICLE_PUBLIE, ARTICLE_MODIFIE,
+    ARTICLE_REFUSE, ARTICLE_VALIDE
+}

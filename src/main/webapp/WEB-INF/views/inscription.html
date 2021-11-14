@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Inscription</title>
+</head>
+<body>
+<h1>Inscription</h1>
+<form action="#" th:action="@{/contributeur/inscription}" th:object="${utilisateurDTO}" method="post">
+    <p>Login: <input type="text" th:field="*{login}"/></p>
+    <p>Nom: <input type="text" th:field="*{nom}"/></p>
+    <p>Prenom: <input type="text" th:field="*{prenom}"/></p>
+    <p>Password: <input type="password" th:field="*{password}"/></p>
+
+    <p><button type="submit" value="Submit" /> S'inscrire</button></p>
+
+    <div th:if="${#fields.hasErrors('global')}">
+        <p style="color: red;" th:each="err : ${#fields.errors('global')}" th:text="${err}" />
+    </div>
+</form>
+
+
+</body>
+</html>
