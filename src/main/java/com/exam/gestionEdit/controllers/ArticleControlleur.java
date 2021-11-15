@@ -23,21 +23,19 @@ public class ArticleControlleur {
     UtilisateurService utilisateurService;
 
     @RequestMapping("")
-    public String afficherArticles(Model model, @SessionAttribute String courant) {
+    public String afficherToutArticle(Model model, @SessionAttribute String courant) {
         model.addAttribute("courant", courant);
         model.addAttribute("articles",articleService.recupererArticles());
-        model.addAttribute("articlesUtilisateur",null);
         model.addAttribute("themes", Theme.getThemes());
-        return("articles");
+        return("interfaceContributeur");
     }
 
     @PostMapping("")
     public String ajouterArticle(ArticleDTO articleDTO,Model model, @SessionAttribute String courant) {
         articleService.proposerArticle(courant, articleDTO.getTitre(), articleDTO.getContenu(), articleDTO.getTheme());
-        model.addAttribute("articles",articleService.recupererArticles());
         model.addAttribute("articlesUtilisateur",utilisateurService.recupererArticlesParContributeur(courant));
         model.addAttribute("themes", Theme.getThemes());
-        return("articles");
+        return("interfaceContributeur");
     }
 
 }

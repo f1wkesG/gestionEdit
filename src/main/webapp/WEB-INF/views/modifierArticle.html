@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Articles</title>
+</head>
+<body>
+
+<h2 th:text="'Modifier ' + ${article.titre}"/>
+
+<form th:action="@{/assistant/modifierArticle}" th:object="${articleDTO}" th:method="post">
+    Titre : <h3 th:text="${article.titre}"></h3>
+    Contenu : <textarea rows="10" type="" name="contenuModifie" th:text="${article.contenu}" ></textarea><br/><br/>
+    Theme : <p th:text="${article.theme}"></p>
+    <input th:type="hidden" th:name="idArticle" th:value="${article.idArticle}">
+    <button type="submit">Ajouter</button>
+</form>
+
+<footer>
+    <button><a href="/assistant/logout">Se deconnecter</a></button>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Articles</title>
+</head>
+<body>
+
+
+<h2 th:text="'Bienvenue ' + ${courant}"/>
+
+<h2 th:text="'Vos articles : '"/>
+<ul>
+    <li th:each="article : ${articlesUtilisateur}">
+        <h3 th:text="${article.titre}"></h3>
+    </li>
+</ul>
+
+<h2 th:text="'Proposer un nouvel article '"/>
+
+<form th:action="@{/contributeur/articles}" th:object="${articleDTO}" th:method="post">
+    Titre : <input type="text" name="titre"><br/><br/>
+    Contenu : <textarea rows="10" type="" name="contenu"></textarea><br/><br/>
+    Theme :
+    <select name="theme">
+        <option th:each="theme : ${themes}" th:value="${theme}" th:text="${theme}"></option>
+    </select><br/><br/>
+    <button type="submit">Ajouter</button>
+</form>
+
+<h2 th:text="'Les articles en attente de validation des modifications :'"/>
+<ul>
+
+    <li th:each="article : ${articlesModifies}">
+        <form th:action="@{/contributeur/valider}" th:object="${articleDTO}" th:method="post">
+            <input th:type="hidden" th:name="idArticle" th:value="${article.idArticle}">
+            <h3 th:text="${article.titre}"></h3>
+            <h4 th:text="${article.theme}"></h4>
+            <p style="color: cornflowerblue" th:text="'Contenu original :'"></p>
+            <p th:text="${article.contenu}"></p>
+            <p style="color: deeppink" th:text="'Contenu modifie :'"></p>
+            <p th:text="${article.contenuModifie}"></p>
+            Vous voulez valider cette modification :
+            <button type="submit">Valider</button>
+        </form>
+        <form th:action="@{/contributeur/refuser}" th:object="${articleDTO}" th:method="post">
+            <input th:type="hidden" th:name="idArticle" th:value="${article.idArticle}">
+            <input th:type="hidden" th:name="titre" th:value="${article.titre}" />
+            <input th:type="hidden" th:name="theme" th:value="${article.theme}" />
+            <input th:type="hidden" th:name="contenu" th:value="${article.contenu}" />
+            <input th:type="hidden" th:name="contenuModife" th:value="${article.contenuModifie}" />
+            Vous voulez refuser cette modification :
+            <button type="submit">Refuser</button>
+            <br/>
+        </form>
+    </li>
+</ul>
+
+<footer>
+    <button><a href="/contributeur/logout">Se deconnecter</a></button>
+</footer>
+
+</body>
+</html>

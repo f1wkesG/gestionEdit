@@ -13,6 +13,7 @@ public class Article {
     private int idArticle;
     private String titre;
     private String contenu;
+    private String contenuModifie;
     private String theme;
 
     @ManyToOne
@@ -26,10 +27,11 @@ public class Article {
     public Article(){
     }
 
-    public Article(int idArticle, String titre, String contenu, String theme, Utilisateur utilisateur, Numero numero, String etat) {
+    public Article(int idArticle, String titre, String contenu, String contenuModifie, String theme, Utilisateur utilisateur, Numero numero, String etat) {
         this.idArticle = idArticle;
         this.titre = titre;
         this.contenu = contenu;
+        this.contenuModifie = contenuModifie;
         this.theme = theme;
         this.utilisateur = utilisateur;
         this.numero = numero;
@@ -68,11 +70,11 @@ public class Article {
         this.theme = theme;
     }
 
-    public Utilisateur getContributeur() {
+    public Utilisateur getUtilisateur() {
         return utilisateur;
     }
 
-    public void setContributeur(Utilisateur utilisateur) {
+    public void setUtilisateur(Utilisateur utilisateur) {
         this.utilisateur = utilisateur;
     }
 
@@ -90,5 +92,13 @@ public class Article {
 
     public void setEtat(String etat) {
         this.etat = etat;
+    }
+
+    public String getContenuModifie() {
+        return contenuModifie;
+    }
+
+    public void setContenuModifie(String contenuModifie) {
+        this.contenuModifie = contenuModifie;
     }
 }

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Articles</title>
+</head>
+<body>
+
+
+<h2 th:text="'La liste de tous les articles proposés'"/>
+<ul>
+    <li th:each="article : ${articles}">
+        <form th:action="@{/assistant/modifierEtat}" th:object="${articleDTO}" th:method="post">
+            <h3 th:text="${article.titre}"></h3>
+            <p style="color: green;" th:text="'Theme : ' + ${article.theme}"/>
+            <p th:text="${article.contenu}"></p>
+            <p style="color: orange;" th:text="'Status :' + ${article.etat}"/><br/>
+            <input th:type="hidden" th:name="idArticle" th:value="${article.idArticle}">
+            <input th:type="hidden" th:name="titre" th:value="${article.titre}"/>
+            <input th:type="hidden" th:name="theme" th:value="${article.theme}"/>
+            <input th:type="hidden" th:name="contenu" th:value="${article.contenu}"/>
+            Changer le status :
+            <select th:name="etat">
+                <option th:each="etat : ${etats}" th:value="${etat}" th:text="${etat}"></option>
+            </select><br/><br/>
+            <button type="submit">Enregistrer</button>
+            <br/>
+        </form>
+        <form th:action="@{/assistant/modification}" th:object="${articleDTO}" th:method="post">
+            Modifier le contenu :
+            <input th:type="hidden" th:name="idArticle" th:value="${article.idArticle}">
+            <input th:type="hidden" th:name="titre" th:value="${article.titre}"/>
+            <input th:type="hidden" th:name="theme" th:value="${article.theme}"/>
+            <input th:type="hidden" th:name="contenu" th:value="${article.contenu}"/>
+            <input th:type="hidden" th:name="etat" th:value="${article.etat}"/>
+            <button type="submit">Modifier</button>
+        </form>
+        <hr/>
+    </li>
+</ul>
+
+<br/>
+<hr/>
+<h2 th:text="'La liste des articles modifies en attente de decision contributeur :'"/>
+<ul>
+    <li th:each="article : ${articlesModifies}">
+        <h3 th:text="${article.titre}"></h3>
+        <p style="color: green;" th:text="'Theme : ' + ${article.theme}"/>
+        <p style="color: cornflowerblue" th:text="'Contenu original :'"></p>
+        <p th:text="${article.contenu}"></p>
+        <p style="color: deeppink" th:text="'Contenu modifie :'"></p>
+        <p th:text="${article.contenuModifie}"></p>
+        <p style="color: orange;" th:text="'Status :' + ${article.etat}"/><br/>
+        <br/>
+        <hr/>
+    </li>
+</ul>
+
+<br/>
+<hr/>
+<h2 th:text="'La liste des articles modifies et valides par leurs contributeurs :'"/>
+<ul>
+    <li th:each="article : ${articlesValides}">
+        <form th:action="@{/assistant/modifierEtat}" th:object="${articleDTO}" th:method="post">
+            <h3 th:text="${article.titre}"></h3>
+            <p style="color: green;" th:text="'Theme : ' + ${article.theme}"/>
+            <p th:text="${article.contenu}"></p>
+            <p style="color: orange;" th:text="'Status :' + ${article.etat}"/><br/>
+            <input th:type="hidden" th:name="idArticle" th:value="${article.idArticle}">
+            <input th:type="hidden" th:name="titre" th:value="${article.titre}"/>
+            <input th:type="hidden" th:name="theme" th:value="${article.theme}"/>
+            <input th:type="hidden" th:name="contenu" th:value="${article.contenu}"/>
+            Changer le status :
+            <select th:name="etat">
+                <option th:each="etat : ${etats}" th:value="${etat}" th:text="${etat}"></option>
+            </select><br/><br/>
+            <button type="submit">Enregistrer</button>
+            <br/>
+        </form>
+        <hr/>
+    </li>
+</ul>
+
+<br/>
+<hr/>
+<h2 th:text="'La liste des articles modifies et refuses par leurs contributeurs :'"/>
+<ul>
+    <li th:each="article : ${articlesRefuses}">
+        <form th:action="@{/assistant/modifierEtat}" th:object="${articleDTO}" th:method="post">
+            <h3 th:text="${article.titre}"></h3>
+            <p style="color: green;" th:text="'Theme : ' + ${article.theme}"/>
+            <p style="color: cornflowerblue" th:text="'Contenu original :'"></p>
+            <p th:text="${article.contenu}"></p>
+            <p style="color: deeppink" th:text="'Contenu modifie :'"></p>
+            <p th:text="${article.contenuModifie}"></p>
+            <p style="color: orange;" th:text="'Status :' + ${article.etat}"/><br/>
+            <input th:type="hidden" th:name="idArticle" th:value="${article.idArticle}">
+            <input th:type="hidden" th:name="titre" th:value="${article.titre}"/>
+            <input th:type="hidden" th:name="theme" th:value="${article.theme}"/>
+            <input th:type="hidden" th:name="contenu" th:value="${article.contenu}"/>
+            Changer le status :
+            <select th:name="etat">
+                <option th:each="etat : ${etats}" th:value="${etat}" th:text="${etat}"></option>
+            </select><br/><br/>
+            <button type="submit">Enregistrer</button>
+            <br/>
+        </form>
+        <hr/>
+    </li>
+</ul>
+
+<br/>
+<hr/>
+<h2 th:text="'La liste des articles rejetes :'"/>
+<ul>
+    <li th:each="article : ${articlesRejetes}">
+        <h3 th:text="${article.titre}"></h3>
+        <p style="color: green;" th:text="'Theme : ' + ${article.theme}"/>
+        <p style="color: cornflowerblue" th:text="'Contenu original :'"></p>
+        <p th:text="${article.contenu}"></p>
+        <p style="color: orange;" th:text="'Status :' + ${article.etat}"/><br/>
+        <br/>
+        <hr/>
+    </li>
+</ul>
+
+<footer>
+    <button><a href="/assistant/logout">Se deconnecter</a></button>
+</footer>
+
+</body>
+</html>

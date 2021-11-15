@@ -9,6 +9,9 @@ import java.util.List;
 @Repository
 public interface ArticleRepository extends JpaRepository<Article, Integer> {
 
-    List<Article> findArticleByTitre(String titre);
+    Article findArticleByTitre(String titre);
+
+    List<Article> findArticlesByEtatIn(List<String> etats);
+
 
 }

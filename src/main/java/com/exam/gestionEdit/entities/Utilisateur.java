@@ -7,7 +7,6 @@ import java.util.List;
 public class Utilisateur {
 
     @Id
-    @GeneratedValue
     private String login;
 
     private String password;

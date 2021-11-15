@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Articles</title>
+</head>
+<body>
+
+<h2 th:text="'Les articles ::'"/>
+<ul>
+    <li th:each="article : ${articles}">
+        <h3 th:text="${article.titre}"></h3>
+        <p style="color: green;" th:text="'Theme : ' + ${article.theme}"/>
+        <p style="color: cornflowerblue" th:text="'Contenu original :'"></p>
+        <p th:text="${article.contenu}"></p>
+    </li>
+</ul>
+
+</body>
+</html>
