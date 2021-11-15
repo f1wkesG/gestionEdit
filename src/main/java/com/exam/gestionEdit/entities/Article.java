@@ -1,15 +1,13 @@
 package com.exam.gestionEdit.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
+@SequenceGenerator(name="articleIdSeq", initialValue=3, allocationSize=100)
 public class Article {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "articleIdSeq")
     private int idArticle;
     private String titre;
     private String contenu;

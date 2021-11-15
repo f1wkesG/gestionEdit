@@ -1,5 +1,6 @@
 package com.exam.gestionEdit.services;
 
+import com.exam.gestionEdit.dtos.NumeroDTO;
 import com.exam.gestionEdit.entities.Numero;
 import com.exam.gestionEdit.repository.NumeroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,4 +35,11 @@ public class NumeroService {
         numero.setBoucle(false);
         numeroRepository.save(numero);
     }
+
+    public void publierNumero(NumeroDTO numeroDTO) {
+        Numero numero = numeroRepository.findById(numeroDTO.getNum()).orElse(null);
+        numero.setBoucle(true);
+        numeroRepository.save(numero);
+    }
+
 }

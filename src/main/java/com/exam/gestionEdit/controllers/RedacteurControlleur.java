@@ -1,6 +1,7 @@
 package com.exam.gestionEdit.controllers;
 
 import com.exam.gestionEdit.dtos.ArticleDTO;
+import com.exam.gestionEdit.dtos.NumeroDTO;
 import com.exam.gestionEdit.dtos.UtilisateurDTO;
 import com.exam.gestionEdit.enums.EtatArticle;
 import com.exam.gestionEdit.services.ArticleService;
@@ -58,6 +59,12 @@ public class RedacteurControlleur {
     }
 
 
+    @PostMapping("publierNumero")
+    public String publierNumero(NumeroDTO numeroDTO){
+        numeroService.publierNumero(numeroDTO);
+        return "redirect:/redacteur/home";
+    }
+
     @PostMapping("publier")
     public String publierArticle(ArticleDTO articleDTO, Model model){
         articleService.publierArticle(articleDTO);
@@ -73,9 +80,10 @@ public class RedacteurControlleur {
 
     public void actualiserModel(Model model){
         model.addAttribute(new ArticleDTO());
+        model.addAttribute(new NumeroDTO());
         model.addAttribute("etats", EtatArticle.getEtatsRedacteur());
         model.addAttribute("numerosNonBoucle", numeroService.recupererNumerosNonBoucles());
-        model.addAttribute("articles",articleService.recupererArticlesPositionnes());
+        model.addAttribute("articlesPositionnes",articleService.recupererArticlesPositionnes());
     }
 
 

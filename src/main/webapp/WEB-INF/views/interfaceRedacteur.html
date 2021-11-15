@@ -2,7 +2,7 @@
 <html xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Articles</title>
+    <title>Redacteur</title>
 </head>
 <body>
 
@@ -10,54 +10,79 @@
     <div th:case="'0'">
         <p style="color: red">ATTENTION IL N'Y A AUCUN NUMERO DISPONIBLE, PENSER A EN CREER UN !</p>
         <form action="/redacteur/creerNumero" method="post">
-            <button type="submit" >Creer Numero Prochain</button>
+            <p>Vous pouvez en créer un par là : </p>
+            <button type="submit">Créer Numero Prochain</button>
         </form>
     </div>
 </td>
 
+<h2 th:text="'La liste de tous les articles positionnés : '"/>
 
-<h2 th:text="'La liste de tous les articles positionnes '"/>
-<ul>
-    <li th:each="article : ${articles}">
-        <form th:action="@{/redacteur/modifierEtat}" th:object="${articleDTO}" th:method="post">
-            <h3 th:text="${article.titre}"></h3>
-            <p style="color: green;" th:text="'Theme : ' + ${article.theme}"/>
-            <p th:text="${article.contenu}"></p>
-            <p style="color: orange;" th:text="'Status :' + ${article.etat}"/><br/>
-            <input th:type="hidden" th:name="idArticle" th:value="${article.idArticle}">
-            <input th:type="hidden" th:name="titre" th:value="${article.titre}"/>
-            <input th:type="hidden" th:name="theme" th:value="${article.theme}"/>
-            <input th:type="hidden" th:name="contenu" th:value="${article.contenu}"/>
-            Changer le status :
-            <select th:name="etat">
-                <option th:each="etat : ${etats}" th:value="${etat}" th:text="${etat}"></option>
-            </select><br/><br/>
-            <button type="submit">Enregistrer changement</button>
-            <br/>
-        </form>
-        <form th:action="@{/redacteur/publier}" th:object="${articleDTO}" th:method="post">
-            <input th:type="hidden" th:name="idArticle" th:value="${article.idArticle}">
-            <input th:type="hidden" th:name="titre" th:value="${article.titre}"/>
-            <input th:type="hidden" th:name="theme" th:value="${article.theme}"/>
-            <input th:type="hidden" th:name="contenu" th:value="${article.contenu}"/>
-            <input th:type="hidden" th:name="etat" th:value="${article.etat}"/>
-            <br/>
-            Vous voulez publier cet article ? :
-            <br/>
-            <td th:switch="${#lists.size(numerosNonBoucle)}">
-                <p th:case="'0'" style="color: red">ATTENTION IL N'Y A AUCUN NUMERO DISPONIBLE, PENSER A EN CREER UN !</p>
-                <div th:case="*">
-                    Choisir le numero :
-                    <select th:name="numero">
-                        <option th:each="numero : ${numerosNonBoucle}" th:value="${numero.num}" th:text="${numero.num}"></option>
+<td th:switch="${#lists.size(articlesPositionnes)}">
+    <p th:case="'0'" style="color: lightcoral">POUR L'INSTANT, IL N'Y A AUCUN ARTICLES POSITIONNES !</p>
+    <div th:case="*">
+        <ul>
+            <li th:each="article : ${articlesPositionnes}">
+                <form th:action="@{/redacteur/modifierEtat}" th:object="${articleDTO}" th:method="post">
+                    <h3 th:text="${article.titre}"></h3>
+                    <p style="color: green;" th:text="'Theme : ' + ${article.theme}"/>
+                    <p th:text="${article.contenu}"></p>
+                    <p style="color: orange;" th:text="'Status :' + ${article.etat}"/><br/>
+                    <input th:type="hidden" th:name="idArticle" th:value="${article.idArticle}">
+                    <input th:type="hidden" th:name="titre" th:value="${article.titre}"/>
+                    <input th:type="hidden" th:name="theme" th:value="${article.theme}"/>
+                    <input th:type="hidden" th:name="contenu" th:value="${article.contenu}"/>
+                    Changer le status :
+                    <select th:name="etat">
+                        <option th:each="etat : ${etats}" th:value="${etat}" th:text="${etat}"></option>
                     </select><br/><br/>
-                    <button type="submit">Publier</button>
-                </div>
-            </td>
+                    <button type="submit">Enregistrer changement</button>
+                    <br/>
+                </form>
+                <form th:action="@{/redacteur/publier}" th:object="${articleDTO}" th:method="post">
+                    <input th:type="hidden" th:name="idArticle" th:value="${article.idArticle}">
+                    <input th:type="hidden" th:name="titre" th:value="${article.titre}"/>
+                    <input th:type="hidden" th:name="theme" th:value="${article.theme}"/>
+                    <input th:type="hidden" th:name="contenu" th:value="${article.contenu}"/>
+                    <input th:type="hidden" th:name="etat" th:value="${article.etat}"/>
+                    <br/>
+                    Vous voulez publier cet article ? :
+                    <br/>
+                    <div th:switch="${#lists.size(numerosNonBoucle)}">
+                        <p th:case="'0'" style="color: red">!! IL N'Y A AUCUN NUMERO DISPONIBLE, PENSER A EN CREER UN
+                            !!</p>
+                        <div th:case="*">
+                            Choisir le numero :
+                            <select th:name="numero">
+                                <option th:each="numero : ${numerosNonBoucle}" th:value="${numero.num}"
+                                        th:text="${numero.num}"></option>
+                            </select><br/><br/>
+                            <button type="submit">Publier</button>
+                        </div>
+                    </div>
+                </form>
+                <hr/>
+            </li>
+        </ul>
+    </div>
+</td>
+
+<div th:switch="${#lists.size(numerosNonBoucle)}">
+    <h2 style="color: darkcyan"><b>Vous voulez publier un numéro :</b></h2>
+    <div th:case="'0'">
+        <h2 style="color: orangered">Aucun numéro non publié n'est disponible</h2>
+    </div>
+    <div th:case="*">
+        <form th:action="@{/redacteur/publierNumero}" th:method="post">
+            <select th:name="num">
+                <option th:each="numero : ${numerosNonBoucle}" th:value="${numero.num}"
+                        th:text="${numero.num}"></option>
+            </select><br/><br/>
+            <button type="submit">Publier numéro</button>
         </form>
-        <hr/>
-    </li>
-</ul>
+    </div>
+</div>
+
 
 <footer>
     <button><a href="/redacteur/logout">Se deconnecter</a></button>

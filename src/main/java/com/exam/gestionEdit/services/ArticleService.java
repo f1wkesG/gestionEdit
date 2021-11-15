@@ -76,7 +76,7 @@ public class ArticleService {
 
     public void validerModification(ArticleDTO articleDTO) {
         Article article = articleRepository.findById(articleDTO.getIdArticle()).orElse(null);
-        article.setContenu(articleDTO.getContenuModifie());
+        article.setContenu(article.getContenuModifie());
         article.setContenuModifie(null);
         article.setEtat(EtatArticle.MODIFICATION_VALIDEE.toString());
         articleRepository.save(article);

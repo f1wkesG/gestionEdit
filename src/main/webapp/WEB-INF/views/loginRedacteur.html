@@ -3,21 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Redacteur</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
 </head>
 <body>
-<h1>IDENTIFICATION REDACTEUR EN CHEF</h1>
-<form action="#" th:action="@{/redacteur/login}" th:object="${utilisateurDTO}" method="post">
-    <p>Veuillez saisir le mot de passe du compte du redacteur en chef :</p>
-    <p>Password: <input type="password" th:field="*{password}" minlength="3"/></p>
-    <p><button type="submit" value="Submit" /> Envoyer</button></p>
+<h3 class="display-4 font-weight-bold text-center">IDENTIFICATION REDACTEUR EN CHEF</h3>
 
-    <div th:if="${#fields.hasAnyErrors()}">
+<div class="container">
+<form action="#" th:action="@{/redacteur/login}" th:object="${utilisateurDTO}" method="post">
+    <div class="form-group">
+        <label>Veuillez entrer le mot de passe du compte redacteur en chef :</label>
+        <input class="form-control" type="password" placeholder="Password" th:field="*{password}" minlength="3">
+    </div>
+    <br>
+    <button class="btn btn-success btn-block" type="submit">Se Connecter</button>
+        <div th:if="${#fields.hasAnyErrors()}">
         <ul>
-            <li  style="color: red;" th:each="err : ${#fields.allErrors()}" th:text="${err}" />
+            <li style="color: red;" th:each="err : ${#fields.allErrors()}" th:text="${err}" />
         </ul>
     </div>
 </form>
-
+</div>
 
 </body>
 </html>

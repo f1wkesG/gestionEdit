@@ -1,16 +1,14 @@
 package com.exam.gestionEdit.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@SequenceGenerator(name="numeroIdSeq", initialValue=1, allocationSize=100)
 public class Numero {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "numeroIdSeq")
     private int num;
 
     private boolean boucle;

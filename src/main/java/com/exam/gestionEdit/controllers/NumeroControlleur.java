@@ -16,8 +16,8 @@ public class NumeroControlleur {
 
     @RequestMapping("")
     public String afficherTout(Model model) {
-        model.addAttribute("numeros", numeroService.recupererNumerosBoucles());
-        return "interfaceNumero";
+        model.addAttribute("numerosBoucles", numeroService.recupererNumerosBoucles());
+        return "interfaceNumeros";
     }
 
     @RequestMapping("numero")

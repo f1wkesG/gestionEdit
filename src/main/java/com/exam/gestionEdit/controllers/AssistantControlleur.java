@@ -4,8 +4,6 @@ package com.exam.gestionEdit.controllers;
 import com.exam.gestionEdit.dtos.ArticleDTO;
 import com.exam.gestionEdit.dtos.UtilisateurDTO;
 import com.exam.gestionEdit.enums.EtatArticle;
-import com.exam.gestionEdit.enums.Theme;
-import com.exam.gestionEdit.exceptions.ContributeurAlreadyExists;
 import com.exam.gestionEdit.services.ArticleService;
 import com.exam.gestionEdit.services.UtilisateurService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +13,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.support.SessionStatus;
 
 import javax.servlet.http.HttpSession;

@@ -3,22 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <title>Inscription</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
 </head>
 <body>
-<h1>Inscription</h1>
+<h3 class="display-4 font-weight-bold text-center">Inscription</h3>
+<div class="container">
 <form action="#" th:action="@{/contributeur/inscription}" th:object="${utilisateurDTO}" method="post">
-    <p>Login: <input type="text" th:field="*{login}"/></p>
-    <p>Nom: <input type="text" th:field="*{nom}"/></p>
-    <p>Prenom: <input type="text" th:field="*{prenom}"/></p>
-    <p>Password: <input type="password" th:field="*{password}"/></p>
-
-    <p><button type="submit" value="Submit" /> S'inscrire</button></p>
-
+    <div class="form-group">
+        <label>Login : </label>
+        <input class="form-control" type="text" placeholder="login" th:field="*{login}" minlength="3">
+    </div>
+    <div class="form-group">
+        <label>Nom : </label>
+        <input class="form-control" type="text" placeholder="Nom..." th:field="*{nom}" minlength="3">
+    </div>
+    <div class="form-group">
+        <label>Prenom : </label>
+        <input class="form-control" type="text" placeholder="Prenom..." th:field="*{prenom}" minlength="3">
+    </div>
+    <div class="form-group">
+        <label>Password</label>
+        <input class="form-control" type="password" placeholder="Password" th:field="*{password}" minlength="3">
+    </div>
+    <br>
+    <button class="btn btn-primary btn-block" type="submit">S'inscrire</button>
     <div th:if="${#fields.hasErrors('global')}">
         <p style="color: red;" th:each="err : ${#fields.errors('global')}" th:text="${err}" />
     </div>
 </form>
-
-
+</div>
 </body>
 </html>

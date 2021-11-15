@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Consultation numéros</title>
+</head>
+<body>
+
+<h2>Consultez tous les numeros publiés : </h2>
+
+<div>
+    <td th:switch="${#lists.size(numerosBoucles)}">
+        <div th:case="'0'">
+            <p style="color: orange">POUR L'INSTANT IL N'Y A AUCUN NUMERO PUBLIE !</p>
+        </div>
+        <div th:case="*">
+            <ul>
+                <li style="display: inline; list-style: none; margin: 10px" th:each="numero : ${numerosBoucles}">
+                    <a th:href="@{/numeros/numero(num=${numero.num})}">
+                        <button type="submit" th:text="${numero.num}">
+                        </button>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </td>
+</div>
+<br/>
+<form action="/">
+    <button type="submit">Revenir vers l'acceuil</button>
+</form>
+</body>
+</html>

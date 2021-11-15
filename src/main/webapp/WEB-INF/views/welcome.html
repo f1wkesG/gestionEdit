@@ -2,17 +2,34 @@
 <html xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Bienvenu</title>
+    <title>Bienvenue</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
 </head>
 <body>
-<h1>Veuillez choisir votre rôle</h1>
 
-<div>
-    <p>
-        <button/><a href="/redacteur">Redacteur en chef</a></button>
-        <button/><a href="/assistant">Assistant Redacteur</a></button>
-        <button/><a href="/contributeur">Contributeur</a></button>
-    </p>
+<div class="container text-dark">
+    <h3>Consultez tous les numeros publiés : </h3>
+
+    <div class="row pt-6 justify-content-center">
+        <a th:href="@{/numeros}">
+            <button class="btn btn-info" type="submit" th:text="'Consulter les numéros publiés'">
+            </button>
+        </a>
+    </div>
+<br/>
+    <br/>
+    <h3>Si vous êtes un utilisateur, veuillez choisir votre rôle : </h3>
+    <div class="row pt-6 justify-content-center">
+        <div class="col-md-4 my-2">
+        <a class="btn btn-success mx-2" href="/redacteur">Redacteur en chef</a>
+        </div>
+        <div class="col-md-4 my-2">
+                <a class="btn btn-danger mx-2" href="/assistant">Assistant Redacteur</a>
+        </div>
+        <div class="col-md-4 my-2">
+                <a class="btn btn-primary mx-2"href="/contributeur">Contributeur</a>
+        </div>
+    </div>
 </div>
 
 
